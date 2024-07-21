@@ -24,6 +24,11 @@ jobs:
       run: |
         echo CPLUS_INCLUDE_PATH=${{ runner.tool_cache }}/Python/3.9.13/x86/include > $GITHUB_ENV
         echo LIBRARY_PATH=${{ runner.tool_cache }}/Python/3.9.13/x86/libs >> $GITHUB_ENV
+        $python_path = "${{ env.PYTHON }}"; 
+        $env:PYTHONHOME = $python_path;
+        $env:PYTHONPATH = "$python_path\Lib";
+        $env:CFLAGS = "-I$python_path\include";
+        $env:LDFLAGS = "-L$python_path\libs -lpython39";
 
     - name: Install dependencies
       run: pip install -r requirements.txt
