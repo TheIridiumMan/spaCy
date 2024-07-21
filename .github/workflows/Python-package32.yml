@@ -20,9 +20,6 @@ jobs:
       with:
         python-version: '3.9'
         architecture: 'x86'
-    runs-on: windows-latest
-
-    steps:
     - name: Set up environment variables for Clang
       run: |
         echo CPLUS_INCLUDE_PATH=${{ runner.tool_cache }}/Python/3.9.13/x86/include > $GITHUB_ENV
@@ -30,6 +27,7 @@ jobs:
 
     - name: Install dependencies
       run: pip install -r requirements.txt
+    - name: Check dirs
       run: |
         echo "Current directory: $(pwd)"
         echo "Listing root directory contents:"
