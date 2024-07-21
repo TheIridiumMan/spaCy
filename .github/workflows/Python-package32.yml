@@ -19,8 +19,17 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.9'
-        architecture: 'x86'
-    - name: Show current directory and list files
+        architecture: x86
+    runs-on: windows-latest
+
+    steps:
+    - name: Set up environment variables for Clang
+      run: |
+        echo CPLUS_INCLUDE_PATH=${{ runner.tool_cache }}/Python/3.9.13/x86/include > $GITHUB_ENV
+        echo LIBRARY_PATH=${{ runner.tool_cache }}/Python/3.9.13/x86/libs >> $GITHUB_ENV
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
       run: |
         echo "Current directory: $(pwd)"
         echo "Listing root directory contents:"
